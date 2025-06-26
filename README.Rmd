@@ -1,0 +1,227 @@
+---
+output: github_document
+always_allow_html: true
+editor_options: 
+  markdown: 
+    wrap: 72
+  chunk_output_type: console
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%",
+  message = FALSE,
+  warning = FALSE,
+  fig.retina = 2,
+  fig.align = 'center'
+)
+```
+
+# Household Water Point Satisfaction Survey – Zomba & Mangochi District
+
+<!-- badges: start -->
+
+[![License: CC BY
+4.0](https://img.shields.io/badge/License-CC_BY_4.0-lightgrey.svg)](https://creativecommons.org/licenses/by/4.0/)
+
+<!-- badges: end -->
+
+This dataset captures household-level information on water access,
+reliability, and user satisfaction across selected communities in Zomba and Mangochi
+Districts in Malawi. The data was collected on September 20, 2021, using
+mWater, a mobile-based data collection platform. Enumerators visited
+households to gather geo-referenced responses through structured digital
+surveys, ensuring high-quality and spatially traceable data.
+
+The survey focused on understanding the condition and accessibility of
+household water sources, user satisfaction with water services, seasonal
+availability, and the economic aspects of water usage. It also gathered
+insights into household well-being and demographics relevant to water
+access and decision-making.
+
+**Potential Use Cases**
+
+This dataset is valuable to a wide range of stakeholders, including:
+
+1.  Local Government and District Water Offices – for planning water
+    infrastructure repairs, expansions, and equitable service delivery.
+
+2.  NGOs and Development Partners (e.g., WaterAid, UNICEF, WASH-focused
+    NGOs) – for identifying priority areas, targeting interventions, and
+    measuring impact.
+
+3.  Policy Makers and Researchers – for analyzing rural water access
+    trends, community resilience, and household-level satisfaction
+    indicators.
+
+4.  WASH Engineers and Planners – for designing technically informed and
+    community-responsive water systems.
+
+5.  Academic Institutions – for research and student projects focusing
+    on water governance, rural development, and environmental health.
+
+## Installation
+
+You can install the development version of waterconsumersurvey from
+[GitHub](https://github.com/) with:
+
+``` r
+# install.packages("devtools")
+devtools::install_github("openwashdata/waterconsumersurvey")
+```
+
+```{r}
+## Run the following code in console if you don't have the packages
+## install.packages(c("dplyr", "knitr", "readr", "stringr", "gt", "kableExtra"))
+library(dplyr)
+library(knitr)
+library(readr)
+library(stringr)
+library(gt)
+library(kableExtra)
+library(fmsb)
+```
+
+Alternatively, you can download the individual datasets as a CSV or XLSX
+file from the table below.
+
+1.  Click Download CSV. A window opens that displays the CSV in your
+    browser.
+2.  Right-click anywhere inside the window and select "Save Page As...".
+3.  Save the file in a folder of your choice.
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+
+extdata_path <- "https://github.com/openwashdata/waterconsumersurvey/raw/main/inst/extdata/"
+
+read_csv("data-raw/dictionary.csv") |> 
+  distinct(file_name) |> 
+  dplyr::mutate(file_name = str_remove(file_name, ".rda")) |> 
+  dplyr::rename(dataset = file_name) |> 
+  mutate(
+    CSV = paste0("[Download CSV](", extdata_path, dataset, ".csv)"),
+    XLSX = paste0("[Download XLSX](", extdata_path, dataset, ".xlsx)")
+  ) |> 
+  knitr::kable()
+
+```
+
+## Data
+
+The package provides access to Household Water Access and Satisfaction Survey collected in 2021 in Zomba and Mangochi districts in Malawi.
+
+```{r}
+library(waterconsumersurvey)
+```
+
+### waterconsumersurvey
+
+The dataset `waterconsumersurvey` contains `r nrow(waterconsumersurvey)` observations and
+`r ncol(waterconsumersurvey)` variables
+
+```{r}
+waterconsumersurvey |> 
+  head(3) |> 
+  gt::gt() |>
+  gt::as_raw_html()
+```
+
+For an overview of the variable names, see the following table.
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+readr::read_csv("data-raw/dictionary.csv") |>
+  dplyr::filter(file_name == "waterconsumersurvey.rda") |>
+  dplyr::select(variable_name:description) |> 
+  knitr::kable() |> 
+  kableExtra::kable_styling("striped") |> 
+  kableExtra::scroll_box(height = "200px")
+```
+
+## Example
+
+```{r}
+library(waterconsumersurvey)
+library(dplyr)
+library(ggplot2)
+library(tidyr)
+library(ggplot2)
+library(dplyr)
+
+# Visualization 1: Bar Chart of Waterpoint Functional Status by District
+# Filter out rows where waterpoint functional status is NA,
+# then group by district and functional status and count number of waterpoints
+status_district <- waterconsumersurvey %>%
+  filter(!is.na(waterpoint_functional_status)) %>%   # Exclude NA functional statuses
+  group_by(district, waterpoint_functional_status) %>%
+  summarise(count = n()) %>%                         # Count occurrences in each group
+  ungroup()
+
+# Create a stacked bar chart showing waterpoint status distribution by district
+ggplot(status_district, aes(x = district, y = count, fill = waterpoint_functional_status)) +
+  geom_bar(stat = "identity") +                      # Use counts directly for bar heights
+  labs(
+    title = "Waterpoint Functional Status by District",
+    x = "District",
+    y = "Number of Waterpoints",
+    fill = "Functional Status"
+  ) +
+  theme_minimal() +
+  # Rotate x-axis labels for better readability if district names are long
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+
+# Vizualisation 2: Water Shortage Seasonality Line Chart
+
+# Step 1: Filter households reporting seasonal water shortage
+shortage_data <- waterconsumersurvey %>%
+  filter(seasonal_water_shortage == "Yes" & !is.na(shortage_months)) %>%
+  select(household_id, shortage_months)
+
+# Step 2: Split shortage_months into separate rows per household
+shortage_expanded <- shortage_data %>%
+  mutate(shortage_months = strsplit(as.character(shortage_months), ",")) %>%
+  unnest(shortage_months) %>%
+  mutate(shortage_months = trimws(shortage_months))  # Remove leading/trailing spaces
+
+# Step 3: Count households by month
+monthly_shortage_counts <- shortage_expanded %>%
+  group_by(shortage_months) %>%
+  summarise(households = n()) %>%
+  ungroup()
+
+# Optional: Order months chronologically (adjust if months in dataset differ)
+month_levels <- c("January", "February", "March", "April", "May", "June",
+                  "July", "August", "September", "October", "November", "December")
+monthly_shortage_counts$shortage_months <- factor(monthly_shortage_counts$shortage_months,
+                                                  levels = month_levels,
+                                                  ordered = TRUE)
+
+# Step 4: Plot line chart
+ggplot(monthly_shortage_counts, aes(x = shortage_months, y = households, group = 1)) +
+  geom_line(color = "steelblue", size = 1.2) +
+  geom_point(color = "steelblue", size = 3) +
+  labs(
+    title = "Seasonal Water Shortage: Number of Households by Month",
+    x = "Month",
+    y = "Number of Households Reporting Shortage"
+  ) +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+```
+
+## License
+
+Data are available as
+[CC-BY](https://github.com/openwashdata/%7B%7B%7Bpackagename%7D%7D%7D/blob/main/LICENSE.md).
+
+## Citation
+
+Please cite this package using:
+
+```{r}
+citation("waterconsumersurvey")
+```

@@ -12,7 +12,7 @@ library(readxl)
 library(openxlsx)
 library(lubridate)
 library(ggplot2)
-library(maps)
+library(fmsb)
 
 # Load Data --------------------------------------------------------------------
 # Load the necessary data from a CSV file
@@ -66,6 +66,8 @@ data_in[] <- lapply(data_in, function(x) {
 check_utf8(data_in)
 
 waterconsumersurvey <- data_in
+
+
 
 # Export Data ------------------------------------------------------------------
 usethis::use_data(waterconsumersurvey, overwrite = TRUE)
