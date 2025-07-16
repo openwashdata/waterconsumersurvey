@@ -1,0 +1,30 @@
+bibentry(
+  bibtype = "Manual",
+  title = "waterconsumersurvey: Household Water Point Satisfaction Survey Data from Malawi",
+  author = c(
+    person("Emmanuel", "Mhango", email = "emmanuellmhango@gmail.com", role = c("aut", "cre"), comment = c(ORCID = "0000-0003-3197-6244")),
+    person("Feston", "Bwanyula", role = "ctb"),
+    person("Rhodrick D.", "Sagawa", role = "ctb"),
+    person("Fatsani", "Chinawa", role = "ctb"),
+    person("Baleke", "Banda", role = "ctb"),
+    person("Alex", "Mchotsa", role = "ctb"),
+    person("Paul", "Kumpukwe", role = "ctb"),
+    person("Derick", "Macheke", role = "ctb"),
+    person("George Mangochi", "Martin", role = "ctb"),
+    person("Khallen", "Malliot", role = "ctb"),
+    person("Christopher", "Mwafulirwa", role = "ctb"),
+    person("Tellia", "Billiat", role = "ctb"),
+    person("Verson", "Chilombo", role = "ctb"),
+    person("Doreen", "Chalira", role = "ctb"),
+    person("Catherine", "Chapotera", role = "ctb")
+  ),
+  year = "2025",
+  note = "R package version 0.0.0.9000",
+  url = "https://github.com/openwashdata/waterconsumersurvey",
+  textVersion = paste(
+    "Mhango, E. et al. (2025).",
+    "waterconsumersurvey: Household Water Point Satisfaction Survey Data from Malawi.",
+    "R package version 0.0.0.9000.",
+    "https://github.com/openwashdata/waterconsumersurvey"
+  )
+)
