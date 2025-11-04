@@ -1,0 +1,42 @@
+# --------------------------------------------
+# CITATION file created with {cffr} R package
+# See also: https://docs.ropensci.org/cffr/
+# --------------------------------------------
+ 
+cff-version: 1.2.0
+message: 'To cite package "waterconsumersurvey" in publications use:'
+type: software
+license: CC-BY-4.0
+title: 'waterconsumersurvey: Household Water Point Satisfaction Survey Data from Malawi'
+version: 0.0.0.9000
+abstract: Provides household-level survey data on water access, reliability, and user
+  satisfaction from Zomba and Mangochi Districts in Malawi. Collected in September
+  2021 using GPS-enabled devices, the dataset includes 423 households with information
+  on water sources, infrastructure conditions, seasonal availability, and demographic
+  indicators relevant to water access and decision-making.
+authors:
+- family-names: Mhango
+  given-names: Emmanuel
+  email: emmanuellmhango@gmail.com
+  orcid: https://orcid.org/0000-0003-3197-6244
+repository-code: https://github.com/openwashdata/waterconsumersurvey
+url: https://github.com/openwashdata/waterconsumersurvey
+date-released: '2025-07-16'
+contact:
+- family-names: Mhango
+  given-names: Emmanuel
+  email: emmanuellmhango@gmail.com
+  orcid: https://orcid.org/0000-0003-3197-6244
+references:
+- type: software
+  title: 'R: A Language and Environment for Statistical Computing'
+  notes: Depends
+  url: https://www.R-project.org/
+  authors:
+  - name: R Core Team
+  institution:
+    name: R Foundation for Statistical Computing
+    address: Vienna, Austria
+  year: '2025'
+  version: '>= 3.5'
+
