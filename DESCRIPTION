@@ -1,5 +1,5 @@
 Package: waterconsumersurvey
-Title: What the Package Does (One Line, Title Case)
+Title: Household Water Point Satisfaction Survey Data from Malawi
 Version: 0.0.0.9000
 Authors@R: c(
     person("Emmanuel", "Mhango", , "emmanuellmhango@gmail.com", role = c("aut", "cre"),
@@ -19,7 +19,12 @@ Authors@R: c(
     person("Doreen", "Chalira", role = "ctb"),
     person("Catherine", "Chapotera", role = "ctb")
   )
-Description: What the package does (one paragraph).
+Description: Provides household-level survey data on water access, reliability, and 
+    user satisfaction from Zomba and Mangochi Districts in Malawi. Collected in 
+    September 2021 using GPS-enabled devices, the dataset includes 423 households 
+    with information on water sources, infrastructure conditions, seasonal 
+    availability, and demographic indicators relevant to water access and 
+    decision-making.
 License: CC BY 4.0
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
@@ -29,6 +34,6 @@ Depends:
 LazyData: true
 Language: en-GB
 Config/Needs/website: rmarkdown
-Date: 2025-06-26
+Date: 2025-07-16
 URL: https://github.com/openwashdata/waterconsumersurvey
 BugReports: https://github.com/openwashdata/waterconsumersurvey/issues
