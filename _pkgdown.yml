@@ -1,5 +1,5 @@
 
-url: https://github.com/openwashdata/waterconsumersurvey
+url: https://openwashdata.github.io/waterconsumersurvey/
 template:
   bootstrap: 5
   includes:
