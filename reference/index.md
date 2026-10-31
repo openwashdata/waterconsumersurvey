@@ -2,6 +2,6 @@
 
 ## All functions
 
-- [`waterconsumersurvey`](https://github.com/openwashdata/waterconsumersurvey/reference/waterconsumersurvey.md)
+- [`waterconsumersurvey`](https://openwashdata.github.io/waterconsumersurvey/reference/waterconsumersurvey.md)
   : Household Water Point Satisfaction Survey – Zomba & Mangochi
   District
