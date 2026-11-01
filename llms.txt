@@ -2,8 +2,6 @@
 
 [![DOI](https://zenodo.org/badge/1008950866.svg)](https://doi.org/10.5281/zenodo.17523094)
 
-A data package published by [openwashdata](https://openwashdata.org).
-
 This dataset captures household-level information on water access,
 reliability, and user satisfaction across selected communities in Zomba
 and Mangochi Districts in Malawi. The data was collected on September
@@ -236,6 +234,8 @@ Data are available as
 [CC-BY](https://github.com/openwashdata/%7B%7B%7Bpackagename%7D%7D%7D/blob/main/LICENSE.md).
 
 ## Citation
+
+Published by openwashdata, <https://openwashdata.org>.
 
 Please cite this package using:
 
